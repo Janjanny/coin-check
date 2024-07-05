@@ -9,14 +9,15 @@ const Searchbar = () => {
   const [currency, setCurrency] = useState('USD')
 
   return (
-    <div className="relative w-full h-full bg-black text-white">
-      <div className="hero text-center w-3/4 mx-auto mt-[5rem]">
-        <h1 className='tex'>CoinCheck</h1>
-        <p>Welcome to CoinCheck, your ultimate destination for everything cryptocurrency. Explore the latest trends, insightful analysis, and expert advice on navigating the exciting world of digital currencies.</p>
+    <div className="relative w-full h-screen bg-black text-white z-[10]">
+      
+      <div className="hero text-center w-[60%] mx-auto relative z-[10] pt-[10rem]">
+        <h1 className='font-extrabold text-transparent text-8xl bg-clip-text bg-gradient-to-tl from-gray-500 via-[#cbcbcb] to-white mb-[0.5rem]'>CoinCheck</h1>
+        <p>Welcome to CoinCheck, your go-to place for everything about cryptocurrency. Discover the latest trends, detailed analysis, and expert advice on navigating the world of digital currencies.</p>
       </div>
-      <div className='text-white py-4 px-5 w-fit absolute top-[40%] left-[50%] rounded-xl border-gray-1 border z-[4]' style={{transform: 'translate(-50%, -50%)', background: 'linear-gradient(121deg, rgba(51,51,51,1) 0%, rgba(65,65,65,1) 100%)'}}>
+      <div className='text-white py-4 px-5 w-fit mt-[3rem] mx-auto rounded-xl border-gray-1 border z-[10]' style={{ background: 'linear-gradient(121deg, rgba(51,51,51,1) 0%, rgba(65,65,65,1) 100%)'}}>
       <div className="input-div flex items-center gap-4 h-[2.5rem]">
-        <div className=' bg-gray-3 h-full w-[20rem] rounded-lg text-white justify-between flex items-center py-2 px-3'>
+        <div className=' bg-gray-3 h-full w-[20rem] rounded-lg text-white justify-between flex items-center py-2 px-3 relative z-[10]'>
           <input type="text" placeholder='Search...' className=' bg-transparent text-base focus:outline-none' />
           <div className="icon cursor-pointer flex items-center justify-center"><box-icon name='search' color="#ffffff" ></box-icon></div>
         </div>
@@ -26,6 +27,11 @@ const Searchbar = () => {
           <box-icon name='chevron-down' color="#ffffff" size="sm"></box-icon> 
         </div>  
       </div>
+
+
+      <div className=' absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] z-[1] '>
+          
+          </div>
 
     </div>
     </div>
