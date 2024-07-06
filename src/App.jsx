@@ -3,17 +3,18 @@ import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Searchbar from './components/Searchbar'
 import { fetchCoinList, searchCoin } from './apiCall'
+import CoinCard from './components/CoinCard';
 
 function App() {
   const [coinList, setCoinList] = useState(null);
-  const [searchedCoin, setSearchedCoin] = useState('ethereum')
+  const [searchInput, setSearchInput] = useState('bitcoin')
 
   // useEffect(() => {
   //   const fetchCoinListData = async() => {
   //     try {
   //       const data = await fetchCoinList();
   //       setCoinList(data);
-  //       // console.log("Coin List ",data)
+  //       console.log("Coin List ",data)
   //     }
   //     catch (err) {
   //       console.log(err)
@@ -23,18 +24,24 @@ function App() {
   //   fetchCoinListData()
   // }, [])
 
-  // function filterCoin(name) {
-  //   return coinList && coinList.filter(coin => coin.name.toLowerCase().includes(name.toLowerCase()))
-  // }
+  useEffect(() => {
+    const searchFunction = async() => {
+      try {
+        const data = await searchCoin(searchInput)
+        console.log(data)
+      }
+      catch(err) {
+        console.log('search error: ', err)
+        throw err
+      }      
+    }
 
-  // console.log(filterCoin('bitcoin'))
+    searchFunction()
+  }, [])
 
-  // const searchResult = async () => {
-  //   try {
-  //     const data = searchCoin(searchedCoin);
-      
-  //   }
-  // }
+
+
+
 
 
   return (
@@ -46,6 +53,8 @@ function App() {
 
         
         <Searchbar/>
+
+        <CoinCard/>
        
 
       </div>
