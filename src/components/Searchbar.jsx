@@ -9,16 +9,16 @@ const Searchbar = () => {
   const [currency, setCurrency] = useState('USD')
 
   return (
-    <div className="relative w-full h-screen bg-black text-white z-[10]">
+    <div className="relative w-full min-h-screen bg-black text-white z-[10]">
       
-      <div className="hero text-center w-[60%] mx-auto relative z-[10] pt-[10rem]">
-        <h1 className='font-extrabold text-transparent text-8xl bg-clip-text bg-gradient-to-tl from-gray-500 via-[#cbcbcb] to-white mb-[0.5rem]'>CoinCheck</h1>
-        <p>Welcome to CoinCheck, your go-to place for everything about cryptocurrency. Discover the latest trends, detailed analysis, and expert advice on navigating the world of digital currencies.</p>
+      <div className="hero text-center w-[90%] leading-tight lg:leading-normal lg:w-[60%] mx-auto relative z-[10] pt-[10rem]">
+        <h1 className='font-extrabold text-transparent text-[4.5rem] md:text-[5.5rem] lg:text-8xl bg-clip-text bg-gradient-to-tl from-gray-500 via-[#cbcbcb] to-white mb-[0.5rem] cursor-default text-center'>CoinCheck</h1>
+        <p className=' text-sm md:text-base'>Welcome to CoinCheck, your go-to place for everything about cryptocurrency. Discover the latest trends, detailed analysis, and expert advice on navigating the world of digital currencies.</p>
       </div>
       <div className='text-white py-4 px-5 w-fit mt-[3rem] mx-auto rounded-xl border-gray-1 border z-[10]' style={{ background: 'linear-gradient(121deg, rgba(51,51,51,1) 0%, rgba(65,65,65,1) 100%)'}}>
-      <div className="input-div flex items-center gap-4 h-[2.5rem]">
-        <div className=' bg-gray-3 h-full w-[20rem] rounded-lg text-white justify-between flex items-center py-2 px-3 relative z-[10]'>
-          <input type="text" placeholder='Search...' className=' bg-transparent text-base focus:outline-none' />
+      <div className="input-div flex items-center gap-4 h-[2.5rem] relative z-[10]">
+        <div className=' bg-gray-3 h-full w-[18rem] md:w-[20rem] rounded-lg text-white justify-between flex items-center py-2 px-3 '>
+          <input type="text" placeholder='Search...' className=' bg-transparent text-base focus:outline-none w-[25rem]' />
           <div className="icon cursor-pointer flex items-center justify-center"><box-icon name='search' color="#ffffff" ></box-icon></div>
         </div>
 
