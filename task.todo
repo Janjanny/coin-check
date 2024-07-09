@@ -5,11 +5,9 @@
     - image
     - market data > current price
     - market data > price change percentage 24h
-    - market data > market cap
-    - market data > fully dilluted valuation
     - market data > market cap rank
+    - market data > market cap
     - market data > max supply
-    - market data > total supply
     - market data > circulating supply
     - market data > low 24h
     - market data > high 24h
