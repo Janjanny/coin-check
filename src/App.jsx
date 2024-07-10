@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-import Navbar from './components/Navbar'
-import Searchbar from './components/Searchbar'
-import { fetchCoinList, searchCoin } from './apiCall'
-import CoinCard from './components/CoinCard';
+import Navbar from "./components/Navbar";
+import Searchbar from "./components/Searchbar";
+import { fetchCoinList, searchCoin } from "./apiCall";
+import CoinCard from "./components/CoinCard";
 
 function App() {
   const [coinList, setCoinList] = useState(null);
-  const [searchInput, setSearchInput] = useState('bitcoin')
+  const [searchInput, setSearchInput] = useState("bitcoin");
 
   // useEffect(() => {
   //   const fetchCoinListData = async() => {
@@ -25,41 +25,30 @@ function App() {
   // }, [])
 
   useEffect(() => {
-    const searchFunction = async() => {
+    const searchFunction = async () => {
       try {
-        const data = await searchCoin(searchInput)
-        console.log(data)
+        const data = await searchCoin(searchInput);
+        console.log(data);
+      } catch (err) {
+        console.log("search error: ", err);
+        throw err;
       }
-      catch(err) {
-        console.log('search error: ', err)
-        throw err
-      }      
-    }
+    };
 
-    searchFunction()
-  }, [])
-
-
-
-
-
+    searchFunction();
+  }, []);
 
   return (
     <>
-    
       <div className="h-screen relative w-full bg-black">
-        
-        <Navbar/>
+        <Navbar />
 
-        
-        <Searchbar/>
+        <Searchbar />
 
-        <CoinCard/>
-       
-
+        <CoinCard />
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
