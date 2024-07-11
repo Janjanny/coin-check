@@ -1,13 +1,30 @@
 import React from "react";
+import { useState } from "react";
 
 const CoinCard = () => {
+
+  const [coinPrice, setCoinPrice] = useState(56000);
+  const [convertCoinValue, setConvertCoinValue] = useState(1);
+  const [convertCurrencyValue, setConvertCurrencyValue] = useState(coinPrice);
+
+  const coinToCurrency = (value) => {
+    const calculate = value * coinPrice
+    setConvertCurrencyValue(calculate);
+  }
+
+  const currencyToCoin = () => {
+
+  }
+
+  
+
   return (
     <>
       <div className="fixed top-0 left-0 w-screen h-screen z-50">
         {/* blur bg */}
         <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
         <div
-          className=" relative z-[50] text-white top-[50%] left-[50%] p-[1.5rem] rounded-lg w-[30rem] bg-gradient-to-b from-[#1F1F1F] to-[#2B2B2B]"
+          className=" relative z-[50] text-white top-[50%] left-[50%] p-[1.5rem] rounded-lg w-[35rem] bg-gradient-to-b from-[#1F1F1F] to-[#2B2B2B]"
           style={{
             transform: "translate(-50%, -50%)",
           }}
@@ -64,17 +81,20 @@ const CoinCard = () => {
           </div>
 
           <div className="coin-converter font-bold mt-4">
-            <h1>
+            <h1 className="mb-4">
               <span>BTC</span> Converter
             </h1>
-            <div className="w-full border border-white flex">
-              <div className="coin-input">
-                <input type="number" className="bg-transparent text-white" />
+            <div className="w-full border border-white flex justify-between items-center rounded-md">
+              <div className="coin-input flex items-center pr-3 border-r border-r-white  pl-2">
+                <input type="number" className="bg-transparent text-white w-full text-left p-2 focus:outline-none " value={convertCoinValue} onChange={(e) => setConvertCoinValue(e.target.value)} />
                 <p>BTC</p>
               </div>
-              <div className="currency-input">
+
+              
+
+              <div className="currency-input flex items-center pl-3 pr-2">
                 <p>USD</p>
-                <input type="number" className="bg-transparent text-white" />
+                <input type="number" className="bg-transparent text-white w-full text-right p-2 focus:outline-none" value={() => coinToCurrency(convertCurrencyValue)} onChange={(e) => setConvertCurrencyValue(e.target.value)} />
               </div>
             </div>
           </div>
