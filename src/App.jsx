@@ -12,8 +12,9 @@ function App() {
   const [coinList, setCoinList] = useState(null);
   const [searchInput, setSearchInput] = useState("bitcoin");
   const [showCurrency, setShowCurrency] = useState(false);
+  const [currency, setCurrency] = useState('USD')
 
-  const [isVisible, setVisible] = useState(true);
+  const [isVisible, setVisible] = useState(false);
 
   // useEffect(() => {
   //   const fetchCoinListData = async() => {
@@ -64,6 +65,10 @@ function App() {
         <Searchbar
           showCurrency={showCurrency}
           setShowCurrency={setShowCurrency}
+          currency={currency}
+          setCurrency={setCurrency}
+          isVisible={isVisible}
+          setVisible={setVisible}
         />
 
         {isVisible && (
@@ -71,7 +76,7 @@ function App() {
         )}
 
         {showCurrency && (
-          <Currencies showCurrency={showCurrency} currencyList={currencyList} />
+          <Currencies showCurrency={showCurrency} setShowCurrency={setShowCurrency} currency={currency} setCurrency={setCurrency} currencyList={currencyList} />
         )}
       </div>
     </>
