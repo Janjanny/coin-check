@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "boxicons";
 
-const Searchbar = () => {
+const Searchbar = ({ showCurrency, setShowCurrency }) => {
   const [currency, setCurrency] = useState("USD");
 
   return (
@@ -31,7 +31,12 @@ const Searchbar = () => {
               placeholder="Search..."
               className=" bg-transparent text-base focus:outline-none w-[25rem]"
             />
-            <div className="icon cursor-pointer flex items-center justify-center">
+            <div
+              className="icon cursor-pointer flex items-center justify-center"
+              onClick={() => {
+                setShowCurrency(!showCurrency);
+              }}
+            >
               <box-icon name="search" color="#ffffff"></box-icon>
             </div>
           </div>
