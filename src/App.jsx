@@ -9,6 +9,8 @@ function App() {
   const [coinList, setCoinList] = useState(null);
   const [searchInput, setSearchInput] = useState("bitcoin");
 
+  const [isVisible, setVisible] = useState(true)
+
   // useEffect(() => {
   //   const fetchCoinListData = async() => {
   //     try {
@@ -45,7 +47,7 @@ function App() {
 
         <Searchbar />
 
-        <CoinCard />
+        {isVisible && <CoinCard isVisible={isVisible} setVisible={setVisible}/>}
       </div>
     </>
   );

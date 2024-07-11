@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import { Icon } from "@iconify/react";
 
-const CoinCard = () => {
+const CoinCard = ({isVisible, setVisible}) => {
 
   const [coinPrice, setCoinPrice] = useState(56000);
   const [convertCoinValue, setConvertCoinValue] = useState(1);
@@ -12,9 +13,10 @@ const CoinCard = () => {
     setConvertCurrencyValue(calculate);
   }
 
-  const currencyToCoin = () => {
-
-  }
+  const currencyToCoin = (value) => {
+    const calculate = value / coinPrice;
+    setConvertCoinValue(calculate)
+  } 
 
   
 
@@ -24,11 +26,12 @@ const CoinCard = () => {
         {/* blur bg */}
         <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
         <div
-          className=" relative z-[50] text-white top-[50%] left-[50%] p-[1.5rem] rounded-lg w-[35rem] bg-gradient-to-b from-[#1F1F1F] to-[#2B2B2B]"
+          className=" relative z-[50] text-white top-[50%] left-[50%] p-[1.5rem] rounded-lg w-[40rem] bg-gradient-to-b from-[#1F1F1F] to-[#2B2B2B]"
           style={{
             transform: "translate(-50%, -50%)",
           }}
         >
+          <div className="icon absolute right-[2rem] cursor-pointer" onClick={() => setVisible(!isVisible)}>X<Icon icon="mdi-light:alert" /></div>
           <div className="row-1 text-sm flex gap-[8px] items-center">
             <div className="div-1 flex items-center gap-[5px]">
               <div className="icon w-[10px] h-[10px] rounded-full bg-white"></div>
@@ -84,17 +87,22 @@ const CoinCard = () => {
             <h1 className="mb-4">
               <span>BTC</span> Converter
             </h1>
-            <div className="w-full border border-white flex justify-between items-center rounded-md">
-              <div className="coin-input flex items-center pr-3 border-r border-r-white  pl-2">
-                <input type="number" className="bg-transparent text-white w-full text-left p-2 focus:outline-none " value={convertCoinValue} onChange={(e) => setConvertCoinValue(e.target.value)} />
+            <div className="w-full border border-white justify-center flex items-center rounded-md">
+
+              <div className="coin-input flex items-center pr-3 border-r border-r-white w-full pl-2  ">
+                <input type="number" className="bg-transparent text-white w-full text-left p-2 focus:outline-none font-normal" value={convertCoinValue} onChange={(e) => {
+                  setConvertCoinValue(e.target.value);
+                  coinToCurrency(e.target.value)
+                }} />
                 <p>BTC</p>
               </div>
 
-              
-
-              <div className="currency-input flex items-center pl-3 pr-2">
+            
+              <div className="currency-input flex items-center pl-3 w-full pr-2 ">
                 <p>USD</p>
-                <input type="number" className="bg-transparent text-white w-full text-right p-2 focus:outline-none" value={() => coinToCurrency(convertCurrencyValue)} onChange={(e) => setConvertCurrencyValue(e.target.value)} />
+                <input type="number" className="bg-transparent text-white w-full text-right p-2 focus:outline-none font-normal" value={convertCurrencyValue} onChange={(e) => {setConvertCurrencyValue(e.target.value); 
+                  currencyToCoin(e.target.value)
+                }} />
               </div>
             </div>
           </div>
