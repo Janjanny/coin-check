@@ -39,9 +39,9 @@ function App() {
       }
     };
 
-    console.log("Fetch Currency Data ", fetchCurrencyData());
-
-  },[]);
+    fetchCurrencyData();
+    // console.log("Fetch Currency Data ", fetchCurrencyData());
+  }, []);
 
   useEffect(() => {
     const searchFunction = async () => {
@@ -56,11 +56,13 @@ function App() {
     if (searchInput) {
       searchFunction();
     }
-  }, [searchInput])
+  }, [searchInput]);
 
   const handleSearch = (search, currency) => {
-    setSearchInput(search.toLowerCase());
+    setSearchInput(search);
     setCurrency(currency);
+    console.log(search);
+    console.log(currency);
   };
 
   return (

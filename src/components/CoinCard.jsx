@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 
 const CoinCard = ({ isVisible, setVisible, coinData, currency }) => {
   const [coinPrice, setCoinPrice] = useState(0);
-  const [convertCoinValue, setConvertCoinValue] = useState(1);
-  const [convertCurrencyValue, setConvertCurrencyValue] = useState(coinPrice);
+  
+  const [coin, setCoin] = useState(null)
 
   const coinToCurrency = (value) => {
     const calculate = value * coinPrice;
@@ -17,15 +17,27 @@ const CoinCard = ({ isVisible, setVisible, coinData, currency }) => {
     setConvertCoinValue(calculate);
   };
 
-  const initialCoinPrice = () => {
-    setCoinPrice(coinData.market_data.current_price.aed);
-  };
+  console.log(coinData);
 
-  initialCoinPrice();
+  useEffect(() => {
+    if (coinData) {
+      const initialCoinPrice = () => {
+        setCoinPrice(coinData.market_data.current_price[currency]);
+      };
+      setCoin(coinData)
+
+      initialCoinPrice();
+    }
+  }, [coinData, currency]);
+
+
+  const [convertCoinValue, setConvertCoinValue] = useState(1);
+  const [convertCurrencyValue, setConvertCurrencyValue] = useState(coinPrice || coinData.market_data.current_price[currency]);
+
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-screen h-screen z-50">
+      {coin ? <div className="fixed top-0 left-0 w-screen h-screen z-50">
         {/* blur bg */}
         <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
         <div
@@ -46,51 +58,51 @@ const CoinCard = ({ isVisible, setVisible, coinData, currency }) => {
           <div className="row-1 text-sm flex gap-[8px] items-center">
             <div className="div-1 flex items-center gap-[5px]">
               <div className="icon w-[10px] h-[10px] rounded-full bg-white"></div>
-              <p className="coin-name font-medium text-lg">Bitcoin</p>
+              <p className="coin-name font-medium text-lg">{coin.name}</p>
             </div>
             <div className="div-2 flex items-center text-xs font-light gap-[8px]">
-              <p className="name-price font-normal">BTC Price</p>
+              <p className="name-price font-normal">{coin.symbol.toUpperCase()} Price</p>
               <div className="ranking bg-gray-1 px-[6px] py-[2px] text-center rounded">
-                #1
+                #{coin.market_cap_rank}
               </div>
             </div>
           </div>
 
           <div className="row-2 flex items-center gap-[12px] mb-[.8rem]">
             <h1 className="price text-[2.5rem] font-bold leading-[3.5rem]">
-              <span className="currency">$</span>000,000
+              <span className="currency">$</span>{coinPrice}
             </h1>
             <div className="arrow-icon text-green-1">.</div>
-            <p className="up-percent text-lg text-green-1">5.2%</p>
+            <p className={`up-percent text-lg ${coin.market_data.price_change_percentage_24h >= 0 ? 'text-green-1' : 'text-red-600'}`}>{coin.market_data.price_change_percentage_24h.toFixed(2)}%</p>
           </div>
 
           {/* gradient line */}
-          <div className="gradient-bar w-full h-[3px] bg-white rounded bg-gradient-to-r from-[#FF3333] via-[#B8CE33] to-[#40EB24] "></div>
+          <div className="gradient-bar w-full h-[3px] font-bold  bg-white rounded bg-gradient-to-r from-[#FF3333] via-[#B8CE33] to-[#40EB24] "></div>
 
           <div className="text-sm font-medium flex justify-between mt-[8px]">
             <p className="low">
-              <span className="currency">$</span>400,000
+              <span className="currency">$</span>{coin.market_data.low_24h[currency]}
             </p>
             <p className="hour-text">24h Range</p>
             <p className="high">
-              <span className="currency">$</span>400,000
+              <span className="currency">$</span>{coin.market_data.high_24h[currency]}
             </p>
           </div>
 
           <div className="row-3 text-xs font-light mt-[1.5rem] grid gap-[8px]">
             <div className="row-3-1 flex justify-between">
               <p>Market Cap</p>
-              <p>$500,000</p>
+              <p>${coin.market_data.market_cap[currency]}</p>
             </div>
 
             <div className="row-3-1 flex justify-between">
               <p>Circulating Supply</p>
-              <p>$500,000</p>
+              <p>{coin.market_data.circulating_supply}</p>
             </div>
 
             <div className="row-3-1 flex justify-between">
               <p>Max Supply</p>
-              <p>$500,000</p>
+              <p>{coin.market_data.max_supply}</p>
             </div>
           </div>
 
@@ -127,7 +139,7 @@ const CoinCard = ({ isVisible, setVisible, coinData, currency }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> : <div>Loading...</div>}
     </>
   );
 };

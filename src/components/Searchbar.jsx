@@ -13,7 +13,7 @@ const Searchbar = ({
 }) => {
   // console.log(isVisible)
 
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState("");
 
   return (
     <div className="relative w-full min-h-screen bg-black text-white z-[10]">
@@ -40,7 +40,9 @@ const Searchbar = ({
               type="text"
               placeholder="Search..."
               className=" bg-transparent text-base focus:outline-none w-[25rem]"
-              onChange={(e) => {setQuery(e.target.value)}}
+              onChange={(e) => {
+                setQuery(e.target.value.toLowerCase());
+              }}
             />
             <div
               className="icon cursor-pointer flex items-center justify-center"
