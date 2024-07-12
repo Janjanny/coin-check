@@ -2,8 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 
-const CoinCard = ({ isVisible, setVisible }) => {
-  const [coinPrice, setCoinPrice] = useState(56000);
+const CoinCard = ({ isVisible, setVisible, coinData, currency }) => {
+  const [coinPrice, setCoinPrice] = useState(0);
   const [convertCoinValue, setConvertCoinValue] = useState(1);
   const [convertCurrencyValue, setConvertCurrencyValue] = useState(coinPrice);
 
@@ -16,6 +16,13 @@ const CoinCard = ({ isVisible, setVisible }) => {
     const calculate = value / coinPrice;
     setConvertCoinValue(calculate);
   };
+
+  const initialCoinPrice = () => {
+    setCoinPrice(coinData.market_data.current_price.aed)
+    
+  }
+
+  initialCoinPrice();
 
   return (
     <>

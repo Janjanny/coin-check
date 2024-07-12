@@ -2,9 +2,13 @@ import React from "react";
 import { sampleCurrencies } from "../apiCall";
 import { Icon } from "@iconify/react";
 
-const Currencies = ({ currencyList, showCurrency, setShowCurrency, currency, setCurrency }) => {
-
-
+const Currencies = ({
+  currencyList,
+  showCurrency,
+  setShowCurrency,
+  currency,
+  setCurrency,
+}) => {
   return (
     <>
       <div className="fixed top-0 left-0 w-screen h-screen z-50">
@@ -16,8 +20,7 @@ const Currencies = ({ currencyList, showCurrency, setShowCurrency, currency, set
             transform: "translate(-50%, -50%)",
           }}
         >
-
-<div
+          <div
             className="icon absolute right-[2rem] cursor-pointer text-white hover:text-gray-1 transition-colors ease-linear"
             onClick={() => setShowCurrency(!showCurrency)}
           >
@@ -27,12 +30,19 @@ const Currencies = ({ currencyList, showCurrency, setShowCurrency, currency, set
             />
           </div>
           <h1 className=" font-bold text-xl">Select Currency</h1>
-          <div className="grid grid-flow-col gap-[2rem] mt-[1.5rem]">
-          {sampleCurrencies.map((currency, index) => (
-            <div key={index} className=" cursor-pointer text-center bg-gray-3 p-2 rounded-md border border-gray-3 hover:border-gray-1 transition-all ease-linear" onClick={() => {setShowCurrency(!showCurrency); setCurrency(currency.toUpperCase())}}>
-              {currency.toUpperCase()}
-            </div>
-          ))}
+          <div className="grid grid-cols-6 gap-[1rem] mt-[1.5rem] overflow-auto h-[15rem]">
+            {currencyList.map((currency, index) => (
+              <div
+                key={index}
+                className=" cursor-pointer text-center bg-gray-3 p-2 rounded-md border border-gray-3 hover:border-gray-1 hover:bg-[#1b1b1b] transition-all ease-linear"
+                onClick={() => {
+                  setShowCurrency(!showCurrency);
+                  setCurrency(currency);
+                }}
+              >
+                {currency.toUpperCase()}
+              </div>
+            ))}
           </div>
         </div>
       </div>

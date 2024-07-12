@@ -12,41 +12,36 @@ function App() {
   const [coinList, setCoinList] = useState(null);
   const [searchInput, setSearchInput] = useState("bitcoin");
   const [showCurrency, setShowCurrency] = useState(false);
-  const [currency, setCurrency] = useState('USD')
+  const [currency, setCurrency] = useState("usd");
+  const [coinData, setCoinData] = useState();
 
   const [isVisible, setVisible] = useState(false);
 
-  // useEffect(() => {
-  //   const fetchCoinListData = async() => {
-  //     try {
-  //       const data = await fetchCoinList();
-  //       setCoinList(data);
-  //       // console.log("Coin List ",data)
-  //     }
-  //     catch (err) {
-  //       console.log(err)
-  //     }
-  //   }
-
-  //   const fetchCurrencyData = async() => {
-  //     try {
-  //       const data = await fetchCurrencyList();
-  //       setCurrencyList(data);
-  //       console.log(currencyList);
-  //     }
-  //     catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-
-  //   fetchCurrencyData()
-  //   fetchCoinListData()
-  // }, [])
-
   useEffect(() => {
+    const fetchCoinListData = async () => {
+      try {
+        const data = await fetchCoinList();
+        setCoinList(data);
+        // console.log("Coin List ",data)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const fetchCurrencyData = async () => {
+      try {
+        const data = await fetchCurrencyList();
+        setCurrencyList(data);
+        console.log(currencyList);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     const searchFunction = async () => {
       try {
         const data = await searchCoin(searchInput);
+        setCoinData(data)
         console.log(data);
       } catch (err) {
         console.log("search error: ", err);
@@ -54,8 +49,12 @@ function App() {
       }
     };
 
-    searchFunction();
+    console.log('Coin Data', searchFunction());
+    console.log('Fetch Currency Data ', fetchCurrencyData() );
+    console.log("Fetch Coin List ", fetchCoinListData());
   }, []);
+
+  {coinData && console.log('Price', coinData.market_data.current_price.usd)}
 
   return (
     <>
@@ -72,11 +71,17 @@ function App() {
         />
 
         {isVisible && (
-          <CoinCard isVisible={isVisible} setVisible={setVisible} />
+          <CoinCard isVisible={isVisible} setVisible={setVisible} coinData={coinData} currency={currency}/>
         )}
 
         {showCurrency && (
-          <Currencies showCurrency={showCurrency} setShowCurrency={setShowCurrency} currency={currency} setCurrency={setCurrency} currencyList={currencyList} />
+          <Currencies
+            showCurrency={showCurrency}
+            setShowCurrency={setShowCurrency}
+            currency={currency}
+            setCurrency={setCurrency}
+            currencyList={currencyList}
+          />
         )}
       </div>
     </>
