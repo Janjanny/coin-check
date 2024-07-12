@@ -18,9 +18,8 @@ const CoinCard = ({ isVisible, setVisible, coinData, currency }) => {
   };
 
   const initialCoinPrice = () => {
-    setCoinPrice(coinData.market_data.current_price.aed)
-    
-  }
+    setCoinPrice(coinData.market_data.current_price.aed);
+  };
 
   initialCoinPrice();
 

@@ -18,43 +18,50 @@ function App() {
   const [isVisible, setVisible] = useState(false);
 
   useEffect(() => {
-    const fetchCoinListData = async () => {
-      try {
-        const data = await fetchCoinList();
-        setCoinList(data);
-        // console.log("Coin List ",data)
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    // const fetchCoinListData = async () => {
+    //   try {
+    //     const data = await fetchCoinList();
+    //     setCoinList(data);
+    //     // console.log("Coin List ",data)
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
+    // console.log("Fetch Coin List ", fetchCoinListData());
 
     const fetchCurrencyData = async () => {
       try {
         const data = await fetchCurrencyList();
         setCurrencyList(data);
-        console.log(currencyList);
+        // console.log(currencyList);
       } catch (error) {
         console.log(error);
       }
     };
 
+    console.log("Fetch Currency Data ", fetchCurrencyData());
+
+  },[]);
+
+  useEffect(() => {
     const searchFunction = async () => {
       try {
         const data = await searchCoin(searchInput);
-        setCoinData(data)
-        console.log(data);
+        setCoinData(data);
       } catch (err) {
-        console.log("search error: ", err);
-        throw err;
+        console.error("Search error:", err);
       }
     };
 
-    console.log('Coin Data', searchFunction());
-    console.log('Fetch Currency Data ', fetchCurrencyData() );
-    console.log("Fetch Coin List ", fetchCoinListData());
-  }, []);
+    if (searchInput) {
+      searchFunction();
+    }
+  }, [searchInput])
 
-  {coinData && console.log('Price', coinData.market_data.current_price.usd)}
+  const handleSearch = (search, currency) => {
+    setSearchInput(search.toLowerCase());
+    setCurrency(currency);
+  };
 
   return (
     <>
@@ -68,10 +75,16 @@ function App() {
           setCurrency={setCurrency}
           isVisible={isVisible}
           setVisible={setVisible}
+          handleSearch={handleSearch}
         />
 
         {isVisible && (
-          <CoinCard isVisible={isVisible} setVisible={setVisible} coinData={coinData} currency={currency}/>
+          <CoinCard
+            isVisible={isVisible}
+            setVisible={setVisible}
+            coinData={coinData}
+            currency={currency}
+          />
         )}
 
         {showCurrency && (

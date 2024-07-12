@@ -9,8 +9,11 @@ const Searchbar = ({
   setCurrency,
   isVisible,
   setVisible,
+  handleSearch,
 }) => {
   // console.log(isVisible)
+
+  const [query, setQuery] = useState('')
 
   return (
     <div className="relative w-full min-h-screen bg-black text-white z-[10]">
@@ -37,10 +40,14 @@ const Searchbar = ({
               type="text"
               placeholder="Search..."
               className=" bg-transparent text-base focus:outline-none w-[25rem]"
+              onChange={(e) => {setQuery(e.target.value)}}
             />
             <div
               className="icon cursor-pointer flex items-center justify-center"
-              onClick={() => setVisible(!isVisible)}
+              onClick={() => {
+                handleSearch(query, currency);
+                setVisible(!isVisible);
+              }}
             >
               <box-icon name="search" color="#ffffff"></box-icon>
             </div>
