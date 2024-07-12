@@ -12,3 +12,11 @@
     - market data > low 24h
     - market data > high 24h
     - symbol
+
+
+    ☐ add error catch
+    ☐ fix number format
+    ☐ fix number conversion delay
+    ☐ add light mode
+    ☐ add link in github
+    ☐ add animation
