@@ -2,13 +2,11 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 
-const CoinCard = ({ isVisible, setVisible, coinData, currency }) => {
+const CoinCard = ({ isVisible, setVisible, coinData, currency, isError }) => {
   const [coinPrice, setCoinPrice] = useState(0);
 
   const [convertCoinValue, setConvertCoinValue] = useState(1);
-  const [convertCurrencyValue, setConvertCurrencyValue] = useState(
-    coinPrice || coinData.market_data.current_price[currency],
-  );
+  const [convertCurrencyValue, setConvertCurrencyValue] = useState(coinPrice);
 
   const [coin, setCoin] = useState(null);
 
@@ -25,7 +23,7 @@ const CoinCard = ({ isVisible, setVisible, coinData, currency }) => {
   console.log(coinData);
 
   useEffect(() => {
-    if (coinData) {
+    if (coinData && !isError) {
       const initialCoinPrice = () => {
         setCoinPrice(coinData.market_data.current_price[currency]);
       };
@@ -57,7 +55,10 @@ const CoinCard = ({ isVisible, setVisible, coinData, currency }) => {
           >
             <div
               className="icon absolute right-[2rem] cursor-pointer text-white hover:text-gray-1 transition-colors ease-linear"
-              onClick={() => setVisible(!isVisible)}
+              onClick={() => {
+                setVisible(!isVisible);
+                setCoin(null);
+              }}
             >
               <Icon
                 icon="material-symbols-light:close"
@@ -162,7 +163,15 @@ const CoinCard = ({ isVisible, setVisible, coinData, currency }) => {
           </div>
         </div>
       ) : (
-        <div>Loading...</div>
+        <div className=""></div>
+        // <div className="fixed top-0 left-0 w-screen h-screen z-50">
+        //   {/* blur */}
+        //   <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
+
+        //   <div className="relative z-[50] text-white top-[50%] left-[50%]">
+        //     <div className="spinner"></div>
+        //   </div>
+        // </div>
       )}
     </>
   );

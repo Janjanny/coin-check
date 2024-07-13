@@ -11,7 +11,7 @@ import ErrorMsg from "./components/ErrorMsg";
 function App() {
   const [currencyList, setCurrencyList] = useState([]);
   const [coinList, setCoinList] = useState(null);
-  const [searchInput, setSearchInput] = useState("bitcoin");
+  const [searchInput, setSearchInput] = useState();
   const [showCurrency, setShowCurrency] = useState(false);
   const [currency, setCurrency] = useState("usd");
   const [coinData, setCoinData] = useState();
@@ -20,17 +20,6 @@ function App() {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    // const fetchCoinListData = async () => {
-    //   try {
-    //     const data = await fetchCoinList();
-    //     setCoinList(data);
-    //     // console.log("Coin List ",data)
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
-    // console.log("Fetch Coin List ", fetchCoinListData());
-
     const fetchCurrencyData = async () => {
       try {
         const data = await fetchCurrencyList();
@@ -45,30 +34,20 @@ function App() {
     // console.log("Fetch Currency Data ", fetchCurrencyData());
   }, []);
 
-  useEffect(() => {
-    const searchFunction = async () => {
-      try {
-        const data = await searchCoin(searchInput);
-        setCoinData(data);
-      } catch (err) {
-        console.error("Search error:", err);
-      }
-    };
-
-    if (searchInput) {
+  const handleSearch = (search, currency) => {
+    if (search || search !== "") {
+      const searchFunction = async () => {
+        try {
+          const data = await searchCoin(search);
+          setCoinData(data);
+          setVisible(true);
+        } catch (err) {
+          console.error("Search error:", err);
+        }
+      };
+      setCurrency(currency);
       searchFunction();
     }
-  }, [searchInput]);
-
-  const handleSearch = (search, currency) => {
-    if(search == "") {
-      setIsError(true)
-    }
-
-    setSearchInput(search);
-    setCurrency(currency);
-    console.log(search);
-    console.log(currency);
   };
 
   return (
@@ -76,7 +55,7 @@ function App() {
       <div className="h-screen relative w-full bg-black">
         <Navbar />
 
-        {!isError && <ErrorMsg isError={isError} setIsError={setIsError}/>}
+        {isError && <ErrorMsg isError={isError} setIsError={setIsError} />}
 
         <Searchbar
           showCurrency={showCurrency}
@@ -94,6 +73,7 @@ function App() {
             setVisible={setVisible}
             coinData={coinData}
             currency={currency}
+            isError={isError}
           />
         )}
 
