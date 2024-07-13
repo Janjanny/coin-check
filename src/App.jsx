@@ -6,6 +6,7 @@ import { fetchCoinList, searchCoin } from "./apiCall";
 import CoinCard from "./components/CoinCard";
 import { fetchCurrencyList } from "./apiCall";
 import Currencies from "./components/Currencies";
+import ErrorMsg from "./components/ErrorMsg";
 
 function App() {
   const [currencyList, setCurrencyList] = useState([]);
@@ -16,6 +17,7 @@ function App() {
   const [coinData, setCoinData] = useState();
 
   const [isVisible, setVisible] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     // const fetchCoinListData = async () => {
@@ -59,6 +61,10 @@ function App() {
   }, [searchInput]);
 
   const handleSearch = (search, currency) => {
+    if(search == "") {
+      setIsError(true)
+    }
+
     setSearchInput(search);
     setCurrency(currency);
     console.log(search);
@@ -69,6 +75,8 @@ function App() {
     <>
       <div className="h-screen relative w-full bg-black">
         <Navbar />
+
+        {!isError && <ErrorMsg isError={isError} setIsError={setIsError}/>}
 
         <Searchbar
           showCurrency={showCurrency}
