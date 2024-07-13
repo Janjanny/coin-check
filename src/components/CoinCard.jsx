@@ -2,11 +2,17 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 
+import currencySymbols from "../currencySymbols.json"
+
+
 const CoinCard = ({ isVisible, setVisible, coinData, setCoinData, currency, isError }) => {
+  
   const [coinPrice, setCoinPrice] = useState(0);
 
   const [convertCoinValue, setConvertCoinValue] = useState(1);
   const [convertCurrencyValue, setConvertCurrencyValue] = useState(coinPrice);
+
+  const [symbol, setSymbol] = useState("")
 
   const [coin, setCoin] = useState(null);
 
@@ -20,15 +26,22 @@ const CoinCard = ({ isVisible, setVisible, coinData, setCoinData, currency, isEr
     setConvertCoinValue(calculate);
   };
 
-  console.log(coinData);
+  const changeSymbol = (currency) => {
+    const currencySymbol = currencySymbols.find(item => item.abbreviation == currency.toUpperCase())
+    return currencySymbol ? setSymbol(currencySymbol.symbol) : 'Currency not found';
+
+  }
+
 
   useEffect(() => {
     if (coinData && !isError) {
       const initialCoinPrice = () => {
         setCoinPrice(coinData.market_data.current_price[currency]);
       };
-      setCoin(coinData);
 
+
+      setCoin(coinData);
+      changeSymbol(currency);
       initialCoinPrice();
     }
   }, [coinData, currency]);
@@ -86,7 +99,7 @@ const CoinCard = ({ isVisible, setVisible, coinData, setCoinData, currency, isEr
 
             <div className="row-2 flex items-center gap-[12px] mb-[.8rem]">
               <h1 className="price text-[2.5rem] font-bold leading-[3.5rem]">
-                <span className="currency">$</span>
+                <span className="currency">{symbol} </span>
                 {coinPrice}
               </h1>
               <div className="arrow-icon text-green-1">.</div>
@@ -102,12 +115,12 @@ const CoinCard = ({ isVisible, setVisible, coinData, setCoinData, currency, isEr
 
             <div className="text-sm font-medium flex justify-between mt-[8px]">
               <p className="low">
-                <span className="currency">$</span>
+                <span className="currency">{symbol} </span>
                 {coin.market_data.low_24h[currency]}
               </p>
               <p className="hour-text">24h Range</p>
               <p className="high">
-                <span className="currency">$</span>
+                <span className="currency">{symbol} </span>
                 {coin.market_data.high_24h[currency]}
               </p>
             </div>
@@ -115,7 +128,7 @@ const CoinCard = ({ isVisible, setVisible, coinData, setCoinData, currency, isEr
             <div className="row-3 text-sm font-normal mt-[1.5rem] grid gap-[8px]">
               <div className="row-3-1 flex justify-between">
                 <p>Market Cap</p>
-                <p>${coin.market_data.market_cap[currency]}</p>
+                <p>{symbol} {coin.market_data.market_cap[currency]}</p>
               </div>
 
               <div className="row-3-1 flex justify-between">

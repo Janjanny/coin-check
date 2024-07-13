@@ -14,7 +14,7 @@
     - symbol
 
 
-    ☐ add error catch
+    ✔ add error catch @done(24-07-13 23:19)
     ☐ fix number format
     ✔ fix number conversion delay @done(24-07-13 21:34)
     ☐ add light mode

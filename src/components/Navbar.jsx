@@ -15,7 +15,7 @@ const Navbar = () => {
       {/* <a href='/' className=' font-bold text-3xl'>CoinCheck</a> */}
       <nav className=" w-10/12 mx-auto flex justify-end">
         <div className="icons flex items-center gap-5 ">
-          <a href="/" className="flex items-center">
+          <a href="https://github.com/Janjanny/coin-check" className="flex items-center" target="_blank">
             <box-icon
               type="logo"
               name="github"
