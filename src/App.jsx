@@ -35,16 +35,29 @@ function App() {
   }, []);
 
   const handleSearch = (search, currency) => {
+    if(search.trim() == "") {
+      setIsError(true)
+    }
+
     if (search || search !== "") {
       const searchFunction = async () => {
         try {
           const data = await searchCoin(search);
           setCoinData(data);
           setVisible(true);
-        } catch (err) {
-          console.error("Search error:", err);
+        } catch (error) {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log("Error status", error.response.status);
+            console.log("Error data", error.response.data);
+            setIsError(true);
+          } else if (error.request) {
+            // The request was made but no response was received
+            console.log("Error request", error.request);
+            setIsError(true);
         }
-      };
+      }}
       setCurrency(currency);
       searchFunction();
     }
@@ -74,6 +87,7 @@ function App() {
             coinData={coinData}
             currency={currency}
             isError={isError}
+            setCoinData={setCoinData}
           />
         )}
 

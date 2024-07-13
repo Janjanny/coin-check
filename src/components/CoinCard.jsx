@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 
-const CoinCard = ({ isVisible, setVisible, coinData, currency, isError }) => {
+const CoinCard = ({ isVisible, setVisible, coinData, setCoinData, currency, isError }) => {
   const [coinPrice, setCoinPrice] = useState(0);
 
   const [convertCoinValue, setConvertCoinValue] = useState(1);
@@ -58,6 +58,7 @@ const CoinCard = ({ isVisible, setVisible, coinData, currency, isError }) => {
               onClick={() => {
                 setVisible(!isVisible);
                 setCoin(null);
+                setCoinData(null)
               }}
             >
               <Icon
