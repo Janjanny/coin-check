@@ -16,7 +16,7 @@ const Searchbar = ({
 
   const [query, setQuery] = useState("");
 
-  const regex = RegExp(query.toLocaleLowerCase(), 'gi');
+  const regex = RegExp(query.toLocaleLowerCase(), "gi");
 
   return (
     <div className="relative w-full min-h-screen bg-black text-white z-[10]">
@@ -57,17 +57,24 @@ const Searchbar = ({
               <box-icon name="search" color="#ffffff"></box-icon>
             </div>
 
-              {/* search suggestions */}
-            {query.trim() !== "" && <div className="w-full absolute bg-gray-3 text-white p-2 bottom-[-45px] left-0 rounded-md">
-              {coinList.map(((coin) => (regex.test(coin.toLocaleLowerCase() ? <div className="w-full p-2 cursor-pointer hover:bg-[#1a1a1a] rounded-md">
-                {coin}
-              </div> :''))))}
-
-              
-            </div>}
+            {/* search suggestions */}
+            {/* {query.trim() !== "" && (
+              <div className="w-full absolute bg-gray-3 text-white p-2 bottom-[-45px] left-0 rounded-md">
+                {coinList.map((coin) =>
+                  regex.test(
+                    coin.toLocaleLowerCase() ? (
+                      <div className="w-full p-2 cursor-pointer hover:bg-[#1a1a1a] rounded-md">
+                        {coin}
+                      </div>
+                    ) : (
+                      ""
+                    ),
+                  ),
+                )}
+              </div>
+            )} */}
           </div>
 
-          
           <div
             className=" bg-gray-3 h-full flex flex-row items-center gap-1 justify-center rounded-md px-2 cursor-pointer"
             onClick={() => {

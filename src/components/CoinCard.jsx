@@ -67,7 +67,7 @@ const CoinCard = ({
           {/* blur bg */}
           <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
           <div
-            className=" relative z-[50] text-white top-[50%] left-[50%] p-[2rem] rounded-xl w-[40rem] bg-gradient-to-b from-[#1F1F1F] to-[#2B2B2B] border border-gray-1"
+            className=" relative z-[50] text-white top-[50%] left-[50%] p-[2rem] rounded-xl w-[28rem] md:w-[33rem] lg:w-[40rem] bg-gradient-to-b from-[#1F1F1F] to-[#2B2B2B] border border-gray-1"
             style={{
               transform: "translate(-50%, -50%)",
             }}
@@ -103,12 +103,12 @@ const CoinCard = ({
               </div>
             </div>
 
-            <div className="row-2 flex items-center gap-[12px] mb-[.8rem]">
+            <div className="row-2 flex items-center gap-[5px] mb-[.8rem]">
               <h1 className="price text-[2.5rem] font-bold leading-[3.5rem]">
                 <span className="currency">{symbol} </span>
                 {coinPrice.toLocaleString()}
               </h1>
-              <div className="arrow-icon text-green-1">.</div>
+              <div className="arrow-icon ">{coin.market_data.price_change_percentage_24h >= 0 ? <box-icon name='chevron-up' color="#20D854" size="md"></box-icon> : <box-icon name='chevron-down' color="#FA3025" size="md"></box-icon>}</div>
               <p
                 className={`up-percent text-lg ${coin.market_data.price_change_percentage_24h >= 0 ? "text-green-1" : "text-red-600"}`}
               >
