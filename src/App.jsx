@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
 import { fetchCoinList, searchCoin } from "./apiCall";
@@ -7,7 +7,11 @@ import { fetchCurrencyList } from "./apiCall";
 import Currencies from "./components/Currencies";
 import ErrorMsg from "./components/ErrorMsg";
 
+
 function App() {
+
+
+  // states
   const [currencyList, setCurrencyList] = useState([]);
   const [coinList, setCoinList] = useState(null);
   const [searchInput, setSearchInput] = useState();
