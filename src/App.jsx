@@ -34,7 +34,8 @@ function App() {
         const data = await fetchCoinList();
         const names = data.map((coin) => coin.name);
         setCoinList(names);
-        console.log(coinList);
+        console.log('data', data)
+        console.log('coinlist', coinList);
       } catch (error) {
         console.log("Error Fetching Coin List: ", error);
       }
