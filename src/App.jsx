@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
 import { fetchCoinList, searchCoin } from "./apiCall";
@@ -30,13 +29,25 @@ function App() {
       }
     };
 
+    const fetchCoinListData = async () => {
+      try {
+        const data = await fetchCoinList();
+        const names = data.map((coin) => coin.name);
+        setCoinList(names);
+        console.log(coinList);
+      } catch (error) {
+        console.log("Error Fetching Coin List: ", error);
+      }
+    };
+
+    fetchCoinListData();
     fetchCurrencyData();
     // console.log("Fetch Currency Data ", fetchCurrencyData());
   }, []);
 
   const handleSearch = (search, currency) => {
-    if(search.trim() == "") {
-      setIsError(true)
+    if (search.trim() == "") {
+      setIsError(true);
     }
 
     if (search || search !== "") {
@@ -56,8 +67,9 @@ function App() {
             // The request was made but no response was received
             console.log("Error request", error.request);
             setIsError(true);
+          }
         }
-      }}
+      };
       setCurrency(currency);
       searchFunction();
     }
@@ -78,6 +90,7 @@ function App() {
           isVisible={isVisible}
           setVisible={setVisible}
           handleSearch={handleSearch}
+          coinList={coinList}
         />
 
         {isVisible && (

@@ -10,6 +10,7 @@ const Searchbar = ({
   isVisible,
   setVisible,
   handleSearch,
+  coinList,
 }) => {
   // console.log(isVisible)
 
