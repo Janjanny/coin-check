@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "boxicons";
+import { ThemeContext } from "../ThemeProvider";
 
 const Searchbar = ({
   showCurrency,
@@ -18,27 +19,29 @@ const Searchbar = ({
 
   const regex = RegExp(query.toLocaleLowerCase(), "gi");
 
+  const {theme} = useContext(ThemeContext)
+
   return (
-    <div className="relative w-full min-h-screen bg-black text-white z-[10]">
+    <div className={`relative w-full min-h-screen ${theme != 'light' ? 'bg-[#fafafa] text-black' : 'bg-black text-white'} z-[10]`}>
       <div className="hero text-center w-[90%] leading-tight lg:leading-normal lg:w-[60%] mx-auto relative z-[10] pt-[10rem]">
-        <h1 className="font-extrabold text-transparent text-[4.5rem] md:text-[5.5rem] lg:text-8xl bg-clip-text bg-gradient-to-tl from-gray-500 via-[#cbcbcb] to-white mb-[0.5rem] cursor-default text-center">
+        <h1 className={`font-extrabold text-transparent text-[4.5rem] md:text-[5.5rem] lg:text-8xl bg-clip-text ${theme == 'light' ? 'bg-gradient-to-tl from-gray-500 via-[#cbcbcb] to-white' : 'bg-gradient-to-tl from-[#5e5e5e] via-[#343434] to-black'} mb-[0.5rem] cursor-default text-center`}>
           CoinCheck
         </h1>
-        <p className=" text-sm md:text-base">
+        <p className=" text-sm md:text-base cursor-default">
           Welcome to CoinCheck, your go-to place for everything about
           cryptocurrency. Discover the latest trends, detailed analysis, and
           expert advice on navigating the world of digital currencies.
         </p>
       </div>
       <div
-        className="text-white py-4 px-5 w-fit mt-[3rem] mx-auto rounded-xl border-gray-1 border z-[10]"
+        className={`${theme == 'light' ? 'text-black border-gray-1' : 'text-white border-white shadow-lg'} py-4 px-5 w-fit mt-[3rem] mx-auto rounded-xl  border z-[10]`}
         style={{
           background:
-            "linear-gradient(121deg, rgba(51,51,51,1) 0%, rgba(65,65,65,1) 100%)",
+            `${theme == 'light' ? 'linear-gradient(121deg, rgba(51,51,51,1) 0%, rgba(65,65,65,1) 100%)' : 'linear-gradient(0deg, hsla(0, 0%, 96%, 1) 0%, hsla(0, 0%, 98%, 1) 100%)'}`,
         }}
       >
         <div className="input-div flex items-center gap-4 h-[2.5rem] relative z-[10]">
-          <div className=" bg-gray-3 h-full w-[18rem] md:w-[20rem] rounded-lg text-white justify-between flex items-center py-2 px-3 relative ">
+          <div className={` ${theme == 'light' ? 'bg-gray-3 text-white' : 'bg-white-2 text-black'} h-full w-[18rem] md:w-[20rem] rounded-lg  justify-between flex items-center py-2 px-3 relative `}>
             <input
               type="text"
               placeholder="Search..."
@@ -54,7 +57,7 @@ const Searchbar = ({
                 setVisible(!isVisible);
               }}
             >
-              <box-icon name="search" color="#ffffff"></box-icon>
+              <box-icon name="search" color={theme == 'light' ? '#ffffff' : '#000000'} ></box-icon>
             </div>
 
             {/* search suggestions */}
@@ -76,13 +79,13 @@ const Searchbar = ({
           </div>
 
           <div
-            className=" bg-gray-3 h-full flex flex-row items-center gap-1 justify-center rounded-md px-2 cursor-pointer"
+            className={`${theme == 'light' ? 'bg-gray-3 text-white' : 'bg-white-2 text-black'} h-full flex flex-row items-center gap-1 justify-center rounded-md px-2 cursor-pointer`}
             onClick={() => {
               setShowCurrency(!showCurrency);
             }}
           >
             {currency.toUpperCase()}
-            <box-icon name="chevron-down" color="#ffffff" size="sm"></box-icon>
+            <box-icon name="chevron-down" color={theme == 'light' ? '#ffffff' : '#000000'} size="sm"></box-icon>
           </div>
         </div>
 

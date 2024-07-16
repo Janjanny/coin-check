@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon } from "@fortawesome/free-regular-svg-icons";
+import React, { useContext, useState } from "react";
+
+import { ThemeContext } from "../ThemeProvider";
 import "boxicons";
 
 const Navbar = () => {
+  const {theme, toggleTheme} = useContext(ThemeContext)
   const [isDark, setDark] = useState(true);
 
   const handleSetDark = () => {
@@ -23,20 +24,18 @@ const Navbar = () => {
             <box-icon
               type="logo"
               name="github"
-              color="#ffffff"
+              color={`${theme == 'light' ? '#ffffff' : '#0a0a0a'}`}
               size="sm"
             ></box-icon>
           </a>
           <div
             className=" cursor-pointer flex items-center"
-            onClick={() => {
-              handleSetDark();
-            }}
+            onClick={toggleTheme}
           >
-            {!isDark ? (
+            {theme == 'light' ? (
               <box-icon name="sun" color="#ffffff" size="sm"></box-icon>
             ) : (
-              <box-icon name="moon" color="#ffffff" size="sm"></box-icon>
+              <box-icon name="moon" color="#0a0a0a" size="sm"></box-icon>
             )}
           </div>
         </div>

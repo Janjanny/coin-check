@@ -7,10 +7,9 @@ import { fetchCurrencyList } from "./apiCall";
 import Currencies from "./components/Currencies";
 import ErrorMsg from "./components/ErrorMsg";
 
+import { ThemeProvider } from "./ThemeProvider";
 
 function App() {
-
-
   // states
   const [currencyList, setCurrencyList] = useState([]);
   const [coinList, setCoinList] = useState(null);
@@ -81,7 +80,7 @@ function App() {
   };
 
   return (
-    <>
+    <ThemeProvider>
       <div className="h-screen relative w-full bg-black">
         <Navbar />
 
@@ -119,7 +118,7 @@ function App() {
           />
         )}
       </div>
-    </>
+    </ThemeProvider>
   );
 }
 

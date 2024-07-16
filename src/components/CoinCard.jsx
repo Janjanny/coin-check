@@ -108,7 +108,21 @@ const CoinCard = ({
                 <span className="currency">{symbol} </span>
                 {coinPrice.toLocaleString()}
               </h1>
-              <div className="arrow-icon ">{coin.market_data.price_change_percentage_24h >= 0 ? <box-icon name='chevron-up' color="#20D854" size="md"></box-icon> : <box-icon name='chevron-down' color="#FA3025" size="md"></box-icon>}</div>
+              <div className="arrow-icon ">
+                {coin.market_data.price_change_percentage_24h >= 0 ? (
+                  <box-icon
+                    name="chevron-up"
+                    color="#20D854"
+                    size="md"
+                  ></box-icon>
+                ) : (
+                  <box-icon
+                    name="chevron-down"
+                    color="#FA3025"
+                    size="md"
+                  ></box-icon>
+                )}
+              </div>
               <p
                 className={`up-percent text-lg ${coin.market_data.price_change_percentage_24h >= 0 ? "text-green-1" : "text-red-600"}`}
               >

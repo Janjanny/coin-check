@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { sampleCurrencies } from "../apiCall";
 import { Icon } from "@iconify/react";
+import { ThemeContext } from "../ThemeProvider";
 
 const Currencies = ({
   currencyList,
@@ -9,15 +10,18 @@ const Currencies = ({
   currency,
   setCurrency,
 }) => {
+
+  const theme = useContext(ThemeContext);
+
   return (
     <>
       <div className="fixed top-0 left-0 w-screen h-screen z-50">
         {/* blur bg */}
         <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
         <div
-          className=" relative z-[50] text-white top-[50%] left-[50%] p-[1.5rem] rounded-lg  w-[28rem] md:w-[33rem] lg:w-[40rem] bg-gradient-to-b from-[#1F1F1F] to-[#2B2B2B]"
+          className={`relative z-[50] top-[50%] left-[50%] p-[1.5rem] rounded-lg w-[28rem] md:w-[33rem] lg:w-[40rem] ${theme != 'light' ? 'text-white bg-[linear-gradient(121deg,_rgba(51,51,51,1)_0%,_rgba(65,65,65,1)_100%)]' : 'text-black bg-[linear-gradient(0deg,_hsla(0,_0%,_96%,_1)_0%,_hsla(0,_0%,_98%,_1)_100%)]'}`}
           style={{
-            transform: "translate(-50%, -50%)",
+              transform : 'translate(-50%, -50%)'
           }}
         >
           <div
