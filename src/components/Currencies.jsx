@@ -11,7 +11,8 @@ const Currencies = ({
   setCurrency,
 }) => {
 
-  const theme = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
+  // console.log(theme)
 
   return (
     <>
@@ -19,7 +20,7 @@ const Currencies = ({
         {/* blur bg */}
         <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
         <div
-          className={`relative z-[50] top-[50%] left-[50%] p-[1.5rem] rounded-lg w-[28rem] md:w-[33rem] lg:w-[40rem] ${theme != 'light' ? 'text-white bg-[linear-gradient(121deg,_rgba(51,51,51,1)_0%,_rgba(65,65,65,1)_100%)]' : 'text-black bg-[linear-gradient(0deg,_hsla(0,_0%,_96%,_1)_0%,_hsla(0,_0%,_98%,_1)_100%)]'}`}
+          className={`relative z-[50] top-[50%] left-[50%] p-[1.5rem] rounded-lg w-[28rem] md:w-[33rem] lg:w-[40rem] ${theme == 'light' ? 'text-white bg-[linear-gradient(121deg,_rgba(51,51,51,1)_0%,_rgba(65,65,65,1)_100%)]' : 'text-black bg-[linear-gradient(0deg,_hsla(0,0%,99%,1)_0%,_hsla(0,0%,95%,1)_100%)]'}`}
           style={{
               transform : 'translate(-50%, -50%)'
           }}
@@ -38,7 +39,7 @@ const Currencies = ({
             {currencyList.map((currency, index) => (
               <div
                 key={index}
-                className=" cursor-pointer text-center bg-gray-3 p-2 rounded-md border border-gray-3 hover:border-gray-1 hover:bg-[#1b1b1b] transition-all ease-linear"
+                className=" cursor-pointer text-center bg-gray-3 border border-gray-3 hover:border-gray-1 hover:bg-[#1b1b1b] p-2 rounded-md  transition-all ease-linear"
                 onClick={() => {
                   setShowCurrency(!showCurrency);
                   setCurrency(currency);
