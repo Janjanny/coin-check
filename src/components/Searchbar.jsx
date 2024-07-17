@@ -22,7 +22,7 @@ const Searchbar = ({
   const {theme} = useContext(ThemeContext)
 
   return (
-    <div className={`relative w-full min-h-screen ${theme != 'light' ? 'bg-[#fafafa] text-black' : 'bg-black text-white'} z-[10]`}>
+    <div className={`relative w-full min-h-screen ${theme != 'light' ? 'bg-[#fafafa] text-black' : 'bg-black text-white'} z-[10] transition-all ease-in-out`}>
       <div className="hero text-center w-[90%] leading-tight lg:leading-normal lg:w-[60%] mx-auto relative z-[10] pt-[10rem]">
         <h1 className={`font-extrabold text-transparent text-[4.5rem] md:text-[5.5rem] lg:text-8xl bg-clip-text ${theme == 'light' ? 'bg-gradient-to-tl from-gray-500 via-[#cbcbcb] to-white' : 'bg-gradient-to-tl from-[#5e5e5e] via-[#343434] to-black'} mb-[0.5rem] cursor-default text-center`}>
           CoinCheck

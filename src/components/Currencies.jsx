@@ -26,7 +26,7 @@ const Currencies = ({
           }}
         >
           <div
-            className="icon absolute right-[2rem] cursor-pointer text-white hover:text-gray-1 transition-colors ease-linear"
+            className={`icon absolute right-[2rem] cursor-pointer ${theme == 'light' ? 'text-white' : 'text-black'} hover:text-gray-1 transition-colors ease-linear`}
             onClick={() => setShowCurrency(!showCurrency)}
           >
             <Icon
@@ -39,7 +39,7 @@ const Currencies = ({
             {currencyList.map((currency, index) => (
               <div
                 key={index}
-                className=" cursor-pointer text-center bg-gray-3 border border-gray-3 hover:border-gray-1 hover:bg-[#1b1b1b] p-2 rounded-md  transition-all ease-linear"
+                className={`cursor-pointer text-center ${theme == 'light' ? 'cursor-pointer text-center bg-gray-3 border border-gray-3 hover:border-gray-1 hover:bg-[#1b1b1b] p-2 rounded-md  transition-all ease-linear' : 'cursor-pointer text-center bg-white-3 border border-white-3 hover:border-white-1 hover:bg-white-2 p-2 rounded-md  transition-all ease-linear'} p-2 rounded-md  transition-all ease-linear`}
                 onClick={() => {
                   setShowCurrency(!showCurrency);
                   setCurrency(currency);
