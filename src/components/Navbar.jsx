@@ -4,7 +4,7 @@ import { ThemeContext } from "../ThemeProvider";
 import "boxicons";
 
 const Navbar = () => {
-  const {theme, toggleTheme} = useContext(ThemeContext)
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const [isDark, setDark] = useState(true);
 
   const handleSetDark = () => {
@@ -24,7 +24,7 @@ const Navbar = () => {
             <box-icon
               type="logo"
               name="github"
-              color={`${theme == 'light' ? '#ffffff' : '#0a0a0a'}`}
+              color={`${theme == "light" ? "#ffffff" : "#0a0a0a"}`}
               size="sm"
             ></box-icon>
           </a>
@@ -32,7 +32,7 @@ const Navbar = () => {
             className=" cursor-pointer flex items-center"
             onClick={toggleTheme}
           >
-            {theme == 'light' ? (
+            {theme == "light" ? (
               <box-icon name="sun" color="#ffffff" size="sm"></box-icon>
             ) : (
               <box-icon name="moon" color="#0a0a0a" size="sm"></box-icon>

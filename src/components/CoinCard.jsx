@@ -61,7 +61,7 @@ const CoinCard = ({
     }
   }, [coinPrice]);
 
-  const {theme} = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
 
   return (
     <>
@@ -70,13 +70,13 @@ const CoinCard = ({
           {/* blur bg */}
           <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
           <div
-            className={`relative z-[50]  top-[50%] left-[50%] p-[2rem] rounded-xl w-[28rem] md:w-[33rem] lg:w-[40rem] ${theme == 'light' ? 'text-white bg-gradient-to-b from-[#1F1F1F] to-[#2B2B2B] border border-gray-1' : 'text-black bg-[linear-gradient(0deg,_hsla(0,0%,99%,1)_0%,_hsla(0,0%,95%,1)_100%)]'}`}
+            className={`relative z-[50]  top-[50%] left-[50%] p-[2rem] rounded-xl w-[28rem] md:w-[33rem] lg:w-[40rem] ${theme == "light" ? "text-white bg-gradient-to-b from-[#1F1F1F] to-[#2B2B2B] border border-gray-1" : "text-black bg-[linear-gradient(0deg,_hsla(0,0%,99%,1)_0%,_hsla(0,0%,95%,1)_100%)]"}`}
             style={{
               transform: "translate(-50%, -50%)",
             }}
           >
             <div
-              className={`icon absolute right-[2rem] cursor-pointer ${theme == 'light' ? 'text-white' : 'text-black'} hover:text-gray-1 transition-colors ease-linear`}
+              className={`icon absolute right-[2rem] cursor-pointer ${theme == "light" ? "text-white" : "text-black"} hover:text-gray-1 transition-colors ease-linear`}
               onClick={() => {
                 setVisible(!isVisible);
                 setCoin(null);
@@ -100,7 +100,9 @@ const CoinCard = ({
                 <p className="name-price font-normal">
                   {coin.symbol.toUpperCase()} Price
                 </p>
-                <div className={`ranking ${theme == 'light' ? 'bg-gray-1 ' : 'bg-white-2 '} px-[6px] py-[2px] text-center rounded"`}>
+                <div
+                  className={`ranking ${theme == "light" ? "bg-gray-1 " : "bg-white-2 "} px-[6px] py-[2px] text-center rounded"`}
+                >
                   #{coin.market_cap_rank}
                 </div>
               </div>
@@ -172,11 +174,13 @@ const CoinCard = ({
               <h1 className="mb-4">
                 <span>{coin.symbol.toUpperCase()}</span> Converter
               </h1>
-              <div className={`w-full border ${theme == 'light' ? 'border-white border-r-white' : 'border-black border-r-black'} justify-center flex items-center rounded-md`}>
+              <div
+                className={`w-full border ${theme == "light" ? "border-white border-r-white" : "border-black border-r-black"} justify-center flex items-center rounded-md`}
+              >
                 <div className="coin-input flex items-center pr-3 border-r  w-full pl-2  ">
                   <input
                     type="number"
-                    className={`bg-transparent ${theme == 'light' ? 'text-white' : 'text-black'} w-full text-left p-2 focus:outline-none font-normal`}
+                    className={`bg-transparent ${theme == "light" ? "text-white" : "text-black"} w-full text-left p-2 focus:outline-none font-normal`}
                     value={convertCoinValue}
                     onChange={(e) => {
                       setConvertCoinValue(e.target.value);
@@ -190,7 +194,7 @@ const CoinCard = ({
                   <p>{currency.toUpperCase()}</p>
                   <input
                     type="number"
-                    className={`bg-transparent ${theme == 'light' ? 'text-white' : 'text-black'} w-full text-right p-2 focus:outline-none font-normal`}
+                    className={`bg-transparent ${theme == "light" ? "text-white" : "text-black"} w-full text-right p-2 focus:outline-none font-normal`}
                     value={convertCurrencyValue}
                     onChange={(e) => {
                       setConvertCurrencyValue(e.target.value);
