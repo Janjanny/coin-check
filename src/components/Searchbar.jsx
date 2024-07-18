@@ -15,6 +15,11 @@ const Searchbar = ({
   handleSearch,
   coinList,
 }) => {
+  const heroText =
+    "Welcome to CoinCheck, your go-to place for everything about cryptocurrency. Discover the latest trends, detailed analysis, and expert advice on navigating the world of digital currencies.";
+
+  const heroTitle = "CoinCheck";
+
   // console.log(isVisible)
 
   const [query, setQuery] = useState("");
@@ -24,9 +29,23 @@ const Searchbar = ({
   const { theme } = useContext(ThemeContext);
 
   useGSAP(() => {
+    gsap.fromTo(
+      ".search-bar",
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, ease: "power1.inOut", duration: 1 },
+    );
 
+    gsap.fromTo(
+      ".word",
+      { opacity: 0 },
+      { opacity: 1, ease: "power1.in", stagger: 0.1, duration: 0.5 },
+    );
 
-    gsap.fromTo(".search-bar", {y:50, opacity: 0}, {y:0, opacity: 1, ease:"power1.inOut", duration: 1})
+    gsap.fromTo(
+      ".letters",
+      { opacity: 0 },
+      { opacity: 1, ease: "power1.in", stagger: 0.2, duration: 1 },
+    );
   });
 
   return (
@@ -35,14 +54,16 @@ const Searchbar = ({
     >
       <div className="hero text-center w-[90%] leading-tight lg:leading-normal lg:w-[60%] mx-auto relative z-[10] pt-[10rem]">
         <h1
-          className={`hero-title font-extrabold text-transparent text-[4.5rem] md:text-[5.5rem] lg:text-8xl bg-clip-text ${theme == "light" ? "bg-gradient-to-tl from-gray-500 via-[#cbcbcb] to-white" : "bg-gradient-to-tl from-[#5e5e5e] via-[#343434] to-black"} mb-[0.5rem] cursor-default text-center`}
+          className={`hero-title flex flex-wrap justify-center font-extrabold text-transparent text-[4.5rem] md:text-[5.5rem] lg:text-8xl bg-clip-text ${theme == "light" ? " text-white-2" : " text-[#111111]"} mb-[0.5rem] cursor-default text-center`}
         >
-          CoinCheck
+          {heroTitle.split("").map((letter) => (
+            <span className="letters">{letter}</span>
+          ))}
         </h1>
-        <p className="hero-text text-sm md:text-base cursor-default">
-          Welcome to CoinCheck, your go-to place for everything about
-          cryptocurrency. Discover the latest trends, detailed analysis, and
-          expert advice on navigating the world of digital currencies.
+        <p className="hero-text text-sm md:text-base cursor-default flex flex-wrap justify-center text-center">
+          {heroText.split(" ").map((word) => (
+            <span className="word">{word} &nbsp; </span>
+          ))}
         </p>
       </div>
       <div
@@ -75,23 +96,6 @@ const Searchbar = ({
                 color={theme == "light" ? "#ffffff" : "#000000"}
               ></box-icon>
             </div>
-
-            {/* search suggestions */}
-            {/* {query.trim() !== "" && (
-              <div className="w-full absolute bg-gray-3 text-white p-2 bottom-[-45px] left-0 rounded-md">
-                {coinList.map((coin) =>
-                  regex.test(
-                    coin.toLocaleLowerCase() ? (
-                      <div className="w-full p-2 cursor-pointer hover:bg-[#1a1a1a] rounded-md">
-                        {coin}
-                      </div>
-                    ) : (
-                      ""
-                    ),
-                  ),
-                )}
-              </div>
-            )} */}
           </div>
 
           <div
@@ -108,8 +112,6 @@ const Searchbar = ({
             ></box-icon>
           </div>
         </div>
-
-        
       </div>
       <div className="grid-bg absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] z-[-1] "></div>
     </div>

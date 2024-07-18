@@ -1,21 +1,35 @@
 import React, { useContext, useState } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 import { ThemeContext } from "../ThemeProvider";
 import "boxicons";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const [isDark, setDark] = useState(true);
 
-  const handleSetDark = () => {
-    setDark(!isDark);
-  };
+  useGSAP(() => {
+    gsap.fromTo(
+      ".icons > *",
+      {
+        x: 40,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        opacity: 1,
+        ease: "power1.in",
+        duration: 0.5,
+        stagger: 0.2,
+      },
+    );
+  });
 
   return (
     <div className="text-white w-full mx-auto py-[2rem]  absolute z-[50] top-0">
       {/* <a href='/' className=' font-bold text-3xl'>CoinCheck</a> */}
-      <nav className=" w-10/12 mx-auto flex justify-end">
-        <div className="icons flex items-center gap-5 ">
+      <nav className="  w-10/12 mx-auto flex justify-end">
+        <div className=" icons flex items-center gap-5 ">
           <a
             href="https://github.com/Janjanny/coin-check"
             className="flex items-center"
