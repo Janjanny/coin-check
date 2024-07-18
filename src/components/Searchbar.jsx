@@ -54,10 +54,10 @@ const Searchbar = ({
     >
       <div className="hero text-center w-[90%] leading-tight lg:leading-normal lg:w-[60%] mx-auto relative z-[10] pt-[10rem]">
         <h1
-          className={`hero-title flex flex-wrap justify-center font-extrabold text-transparent text-[4.5rem] md:text-[5.5rem] lg:text-8xl bg-clip-text ${theme == "light" ? " text-white-2" : " text-[#111111]"} mb-[0.5rem] cursor-default text-center`}
+          className={`hero-title flex flex-wrap justify-center font-extrabold text-transparent text-[4.5rem] md:text-[5.5rem] lg:text-8xl bg-clip-text  mb-[0.5rem] cursor-default text-center`}
         >
           {heroTitle.split("").map((letter) => (
-            <span className="letters">{letter}</span>
+            <span className={`letters ${theme == "light" ? " text-white-2" : " text-[#111111]"}`}>{letter}</span>
           ))}
         </h1>
         <p className="hero-text text-sm md:text-base cursor-default flex flex-wrap justify-center text-center">
